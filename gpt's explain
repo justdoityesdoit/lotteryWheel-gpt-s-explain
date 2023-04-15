@@ -1,0 +1,70 @@
+const candidate = Array(45).fill().map((v, i) => i + 1);
+
+//This line creates an array of length 45, fills it with undefined values, 
+and then maps over each element to replace it with its index value plus one. 
+This creates an array of numbers from 1 to 45, which are the candidates for the lottery.
+
+
+
+const shuffle = [];
+while (candidate.length > 0) {
+  const random = Math.floor(Math.random() * candidate.length); //randomly choose the index
+  const spliceArray = candidate.splice(random, 1); //chosen result are in the array
+  const value = spliceArray[0]; //pick up the result in the array
+  shuffle.push(value); //put them into the shuffle
+}
+console.log(shuffle);
+
+//This code shuffles the array of candidate numbers using the Fisher-Yates algorithm. 
+It starts by creating an empty array called shuffle. Then it enters a loop that repeats 
+while there are still candidate numbers left. Inside the loop, it generates a random integer 
+between 0 and the length of the candidate array minus one, and uses that integer as an index 
+to splice out one element from the candidate array. 
+It then adds that element to the end of the shuffle array. Once the loop is finished, 
+shuffle will contain a random permutation of the numbers 1 to 45.
+
+
+
+const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b);
+const bonus = shuffle[6];
+console.log(winBalls, bonus);
+
+//This code creates two arrays, winBalls and bonus, that will be used to display 
+the lottery results. winBalls is a sorted copy of the first six elements of the shuffled array. 
+bonus is the seventh element of the shuffled array. 
+The code then logs these arrays to the console for debugging purposes.
+
+
+
+const $result = document.querySelector('#result');
+const $bonus = document.querySelector('#bonus');
+
+//These lines create two variables, $result and $bonus, that are set to the HTML elements 
+with IDs "result" and "bonus", respectively. These elements will be used to display the lottery results.
+
+
+
+function colorize(number, $tag) {
+  if (number < 10) {
+    $tag.style.backgroundColor = 'red';
+    $tag.style.color = 'white';
+  } else if (number < 20) {
+    $tag.style.backgroundColor = 'orange';
+  } else if (number < 30) {
+    $tag.style.backgroundColor = 'yellow';
+  } else if (number < 40) {
+    $tag.style.backgroundColor = 'blue';
+    $tag.style.color = 'white';
+  } else {
+    $tag.style.backgroundColor = 'green';
+    $tag.style.color = 'white';
+  }
+};
+
+//This code defines a function called colorize that takes two arguments: number, 
+which is the lottery number to be colored, and $tag, which is the HTML element 
+that will display the number. The function sets the background color and text color of 
+the $tag element based on the value of number. If number is less than 10, the background color 
+is red and the text color is white. If it's between 10 and 19, the background color is orange. 
+If it's between 20 and 29, the background color is yellow. 
+If it's between 30 and 39, the background color is blue and the text color is white. Otherwise, the background color is green
